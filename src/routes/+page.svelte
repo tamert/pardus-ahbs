@@ -197,55 +197,57 @@
         </section>
 
         <!-- Randevular Pane -->
-        <section class="flex flex-col bg-white dark:bg-zinc-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm overflow-hidden pane-animate hover:shadow-lg transition-shadow duration-300" style="animation-delay: 0.1s;">
-          <header class="flex items-center justify-between px-6 py-5 border-b border-gray-100 dark:border-gray-800 bg-white dark:bg-zinc-900">
+        <section class="flex flex-col bg-white dark:bg-zinc-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm overflow-hidden pane-animate hover:shadow-lg transition-shadow duration-300 h-full" style="animation-delay: 0.1s;">
+          <header class="flex items-center justify-between px-8 py-6 border-b border-gray-100 dark:border-gray-800 bg-white dark:bg-zinc-900">
             <div class="flex items-center gap-4">
               <div class="w-1.5 h-5 bg-orange-500 rounded-full"></div>
-              <h2 class="text-[11px] font-black text-gray-800 dark:text-gray-100 uppercase tracking-widest">MHRS RANDEVULARI</h2>
+              <h2 class="text-xs font-black text-gray-800 dark:text-gray-100 uppercase tracking-widest">MHRS RANDEVULARI</h2>
             </div>
             <Tag type="warm-gray" size="sm" class="font-bold m-0 opacity-60 italic">GÜNCEL</Tag>
           </header>
-          <div class="flex-1 flex flex-col items-center justify-center p-8 bg-gray-50/50 dark:bg-zinc-950/30">
-             <div class="w-20 h-20 bg-white dark:bg-zinc-800 rounded-full flex items-center justify-center mb-6 shadow-sm border border-dashed border-gray-200 dark:border-gray-700">
-                <Search size={28} class="text-gray-300" />
+          <div class="flex-1 flex flex-col items-center justify-center p-12 bg-gray-50/50 dark:bg-zinc-950/30 gap-6">
+             <div class="w-24 h-24 bg-white dark:bg-zinc-800 rounded-full flex items-center justify-center shadow-sm border border-dashed border-gray-200 dark:border-gray-700">
+                <Search size={32} class="text-gray-300" />
              </div>
-             <p class="text-xs font-black text-gray-500 uppercase tracking-wide">Randevu listesi boş</p>
-             <p class="text-[10px] text-gray-400 mt-2 font-medium">Sistem otomatik senkronize ediliyor</p>
+             <div class="text-center space-y-2">
+               <p class="text-sm font-black text-gray-500 uppercase tracking-wide">Randevu listesi boş</p>
+               <p class="text-xs text-gray-400 font-medium">Sistem otomatik senkronize ediliyor</p>
+             </div>
           </div>
         </section>
 
         <!-- Tamamlananlar Pane -->
-        <section class="flex flex-col bg-white dark:bg-zinc-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm overflow-hidden pane-animate hover:shadow-lg transition-shadow duration-300" style="animation-delay: 0.2s;">
-          <header class="flex items-center justify-between px-6 py-5 border-b border-gray-100 dark:border-gray-800 bg-white dark:bg-zinc-900">
+        <section class="flex flex-col bg-white dark:bg-zinc-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm overflow-hidden pane-animate hover:shadow-lg transition-shadow duration-300 h-full" style="animation-delay: 0.2s;">
+          <header class="flex items-center justify-between px-8 py-6 border-b border-gray-100 dark:border-gray-800 bg-white dark:bg-zinc-900">
             <div class="flex items-center gap-4">
               <div class="w-1.5 h-5 bg-emerald-500 rounded-full"></div>
-              <h2 class="text-[11px] font-black text-gray-800 dark:text-gray-100 uppercase tracking-widest">TAMAMLANAN MUAYENELER</h2>
+              <h2 class="text-xs font-black text-gray-800 dark:text-gray-100 uppercase tracking-widest">TAMAMLANAN MUAYENELER</h2>
             </div>
           </header>
-          <div class="flex-1 bg-gray-50/50 dark:bg-zinc-950/30 p-6 flex flex-col items-center justify-center">
-             <div class="w-full h-full border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-xl flex flex-col items-center justify-center bg-white/50 dark:bg-zinc-900/50">
-                <Checkmark size={32} class="text-gray-200 mb-4" />
-                <p class="text-[10px] font-black text-gray-300 uppercase tracking-wider">İşlem geçmişi bulunamadı</p>
+          <div class="flex-1 p-8 bg-gray-50/50 dark:bg-zinc-950/30 flex flex-col items-center justify-center">
+             <div class="w-full h-full border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-2xl flex flex-col items-center justify-center bg-white/50 dark:bg-zinc-900/50 gap-4">
+                <Checkmark size={40} class="text-gray-200" />
+                <p class="text-xs font-black text-gray-300 uppercase tracking-wider">İşlem geçmişi bulunamadı</p>
              </div>
           </div>
         </section>
 
         <!-- Insights Pane -->
-        <section class="flex flex-col bg-white dark:bg-zinc-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm overflow-hidden pane-animate hover:shadow-lg transition-shadow duration-300" style="animation-delay: 0.3s;">
-          <header class="flex items-center justify-between px-6 py-5 border-b border-gray-100 dark:border-gray-800 bg-white dark:bg-zinc-900">
+        <section class="flex flex-col bg-white dark:bg-zinc-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm overflow-hidden pane-animate hover:shadow-lg transition-shadow duration-300 h-full" style="animation-delay: 0.3s;">
+          <header class="flex items-center justify-between px-8 py-6 border-b border-gray-100 dark:border-gray-800 bg-white dark:bg-zinc-900">
              <div class="flex items-center gap-4">
                <div class="w-1.5 h-5 bg-purple-500 rounded-full"></div>
-               <h2 class="text-[11px] font-black text-gray-800 dark:text-gray-100 uppercase tracking-widest">POLİKLİNİK ÖZETİ</h2>
+               <h2 class="text-xs font-black text-gray-800 dark:text-gray-100 uppercase tracking-widest">POLİKLİNİK ÖZETİ</h2>
              </div>
           </header>
-          <div class="flex-1 p-6 flex flex-col gap-4 bg-gray-50/50 dark:bg-zinc-950/30 overflow-auto">
-             <div class="flex justify-between items-center bg-white dark:bg-zinc-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-blue-200 transition-colors">
-                <span class="text-[10px] font-black text-gray-400 uppercase tracking-wider">Bugün Toplam</span>
-                <span class="text-4xl font-black text-blue-600 tracking-tighter">1</span>
+          <div class="flex-1 p-8 flex flex-col gap-6 bg-gray-50/50 dark:bg-zinc-950/30 overflow-auto justify-center">
+             <div class="flex justify-between items-center bg-white dark:bg-zinc-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-blue-200 transition-all hover:scale-[1.02]">
+                <span class="text-xs font-black text-gray-400 uppercase tracking-wider">Bugün Toplam</span>
+                <span class="text-5xl font-black text-blue-600 tracking-tighter">1</span>
              </div>
-             <div class="flex justify-between items-center bg-white dark:bg-zinc-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-emerald-200 transition-colors">
-                <span class="text-[10px] font-black text-gray-400 uppercase tracking-wider">Görüntülü Muayene</span>
-                <span class="text-4xl font-black text-emerald-500 tracking-tighter">0</span>
+             <div class="flex justify-between items-center bg-white dark:bg-zinc-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-emerald-200 transition-all hover:scale-[1.02]">
+                <span class="text-xs font-black text-gray-400 uppercase tracking-wider">Görüntülü Muayene</span>
+                <span class="text-5xl font-black text-emerald-500 tracking-tighter">0</span>
               </div>
            </div>
         </section>
