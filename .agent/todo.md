@@ -1,9 +1,9 @@
 # AHBS Projesi Geliştirme Planı
 
 ## 🏗️ Temel Yapı
-- [x] Proje temel yapısının kurulması (Tauri 2 + Svelte 5 + Tailwind CSS)
+- [x] Proje temel yapısının kurulması (Tauri 2 + Svelte 5 + Carbon Design System)
 - [x] Veritabanı altyapısının kurgulanması (SQLite + SQLx)
-- [x] Modern ve premium UI taslak tasarımı
+- [x] Dark/Light mod desteği (Carbon modunda)
 - [ ] SQLite Migration yapısının düzenlenmesi
 - [ ] Kimlik doğrulama (Doktor girişi)
 

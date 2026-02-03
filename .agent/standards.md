@@ -13,10 +13,11 @@ Pardus AHBS projesinde uygulanacak kod standartları aşağıdadır.
 - Bileşen isimleri `PascalCase` olmalıdır (Örn: `PatientCard.svelte`).
 - Yardımcı fonksiyonlar `utils/` klasöründe, API çağrıları `services/` klasöründe tutulmalıdır.
 
-### 3. Styling (Tailwind CSS)
-- Inline style kullanımından kaçınılmalıdır.
-- Karmaşık sınıflar için `@apply` yerine Tailwind'in utility-first felsefesi korunmalıdır.
-- Renk paleti `tailwind.config.js` dosyasındaki tanımlara sadık kalınarak kullanılmalıdır.
+### 3. Styling & UI (Carbon Design System)
+- Projenin ana tasarım sistemi **Carbon Design System (IBM)**'dir.
+- UI bileşenleri için `carbon-components-svelte` kütüphanesi kullanılmalıdır.
+- **Tema Yönetimi:** Uygulama, sistem temasını (Dark/Light) otomatik olarak takip etmeli ve Carbon'un "white" (light) ve "g100" (dark) temalarını kullanmalıdır.
+- Renkler ve spacing için Carbon token'larına sadık kalınmalı, ad-hoc Tailwind sınıflarından kaçınılmalıdır.
 
 ## Backend (Rust + Tauri)
 
