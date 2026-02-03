@@ -11,7 +11,7 @@
     InlineNotification,
     Tag
   } from "carbon-components-svelte";
-  import { Save, Medication, Stethoscope } from "carbon-icons-svelte";
+  import { Save, Medication, Stethoscope, Add, Close } from "carbon-icons-svelte";
   import { examinationService, type CreateExaminationInput, type CreatePrescriptionInput } from "$lib/services/examination";
   import type { Patient } from "$lib/services/patient";
 

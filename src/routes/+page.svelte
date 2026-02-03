@@ -14,7 +14,10 @@
     ArrowRight,
     Settings,
     Screen,
-    Search
+    Search,
+    Stethoscope,
+    Chemistry,
+    Time
   } from "carbon-icons-svelte";
   
   import PatientList from "$lib/components/patients/PatientList.svelte";
@@ -28,6 +31,7 @@
   let showAddForm = $state(false);
   let selectedPatient = $state<Patient | null>(null);
   let activeView = $state<"standard" | "examination">("standard");
+  let activeModule = $state<"muayene" | "asi">("muayene");
 
   // MOCK DATA
   const bekleyenHastalar = [
@@ -52,6 +56,7 @@
     selectedPatient = patient;
     activeTab = "poliklinik";
     activeView = "examination";
+    activeModule = "muayene";
   }
 
   function closeExamination() {
@@ -63,10 +68,10 @@
 
 <!-- Modernized Header & Navigation -->
 <nav class="fixed top-0 left-0 right-0 z-50 bg-[#0f62fe] text-white shadow-md">
-  <div class="flex items-center justify-between px-6 h-12">
+  <div class="flex items-center justify-between px-6 h-14">
     <div class="flex items-center gap-6 h-full">
       <div class="flex items-center gap-2">
-        <div class="w-2 h-5 bg-white rounded-full"></div>
+        <div class="w-2 h-6 bg-white rounded-full"></div>
         <h1 class="text-base font-black tracking-tight uppercase leading-none mt-0.5">Özgür <span class="font-normal opacity-80">AHBS</span></h1>
       </div>
       
@@ -98,59 +103,57 @@
   </div>
 
   <!-- Refined Ribbon (Conditional) -->
-  {#if activeTab === 'hasta_kabul'}
-    <div class="flex items-center gap-2 px-6 py-2 bg-white dark:bg-zinc-900 border-b border-gray-200 dark:border-gray-800 h-16 shadow-sm">
-      <div class="flex items-center gap-3 pr-6 border-r border-gray-100 dark:border-gray-800">
-        <Button 
-          kind={showAddForm ? "danger--ghost" : "primary"} 
-          size="field" 
-          icon={showAddForm ? Close : Add} 
-          onclick={() => showAddForm = !showAddForm}
-          class="font-extrabold tracking-tight px-6 rounded-lg"
-        >
-          {showAddForm ? 'İPTAL ET' : 'YENİ HASTA KAYDI'}
-        </Button>
-      </div>
+  <div class="flex items-center gap-2 px-6 py-2 bg-white dark:bg-zinc-900 border-b border-gray-200 dark:border-gray-800 h-16 shadow-sm">
+    <div class="flex items-center gap-3 pr-6 border-r border-gray-100 dark:border-gray-800">
+      <Button 
+        kind={showAddForm ? "danger--ghost" : "primary"} 
+        size="field" 
+        icon={showAddForm ? Close : Add} 
+        onclick={() => showAddForm = !showAddForm}
+        class="font-extrabold tracking-tight px-6 rounded-lg"
+      >
+        {showAddForm ? 'İPTAL ET' : 'YENİ HASTA KAYDI'}
+      </Button>
+    </div>
 
-      <div class="flex items-center gap-2 overflow-x-auto no-scrollbar ml-4">
-        <div class="flex flex-col items-center justify-center min-w-[56px] h-11 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all cursor-pointer group active:scale-95">
-          <UserFollow size={18} class="text-blue-600 group-hover:-translate-y-0.5 transition-transform" />
-          <span class="text-[9px] mt-1 font-bold text-gray-500 uppercase">Çağır</span>
-        </div>
-        <div class="flex flex-col items-center justify-center min-w-[56px] h-11 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all cursor-pointer group active:scale-95">
-          <Checkmark size={18} class="text-emerald-600 group-hover:-translate-y-0.5 transition-transform" />
-          <span class="text-[9px] mt-1 font-bold text-gray-500 uppercase">Muayene</span>
-        </div>
-        <div class="flex flex-col items-center justify-center min-w-[56px] h-11 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-all cursor-pointer group active:scale-95">
-          <ArrowRight size={18} class="text-orange-500 group-hover:translate-x-0.5 transition-transform" />
-          <span class="text-[9px] mt-1 font-bold text-gray-500 uppercase">Ertele</span>
-        </div>
-        <div class="flex flex-col items-center justify-center min-w-[56px] h-11 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-all cursor-pointer group active:scale-95">
-          <Close size={18} class="text-red-500 group-hover:scale-110 transition-transform" />
-          <span class="text-[9px] mt-1 font-bold text-gray-500 uppercase">Sil</span>
-        </div>
+    <div class="flex items-center gap-2 overflow-x-auto no-scrollbar ml-4">
+      <div class="flex flex-col items-center justify-center min-w-[56px] h-11 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all cursor-pointer group active:scale-95">
+        <UserFollow size={18} class="text-blue-600 group-hover:-translate-y-0.5 transition-transform" />
+        <span class="text-[9px] mt-1 font-bold text-gray-500 uppercase">Çağır</span>
       </div>
+      <div class="flex flex-col items-center justify-center min-w-[56px] h-11 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all cursor-pointer group active:scale-95">
+        <Checkmark size={18} class="text-emerald-600 group-hover:-translate-y-0.5 transition-transform" />
+        <span class="text-[9px] mt-1 font-bold text-gray-500 uppercase">Muayene</span>
+      </div>
+      <div class="flex flex-col items-center justify-center min-w-[56px] h-11 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-all cursor-pointer group active:scale-95">
+        <ArrowRight size={18} class="text-orange-500 group-hover:translate-x-0.5 transition-transform" />
+        <span class="text-[9px] mt-1 font-bold text-gray-500 uppercase">Ertele</span>
+      </div>
+      <div class="flex flex-col items-center justify-center min-w-[56px] h-11 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-all cursor-pointer group active:scale-95">
+        <Close size={18} class="text-red-500 group-hover:scale-110 transition-transform" />
+        <span class="text-[9px] mt-1 font-bold text-gray-500 uppercase">Sil</span>
+      </div>
+    </div>
 
-      <!-- Status Badge (UX Friendly) -->
-      <div class="ml-auto hidden lg:flex items-center gap-6">
-        <div class="flex gap-4">
-          <div class="flex flex-col items-center px-4 border-r border-gray-100 dark:border-gray-800">
-            <span class="text-[10px] font-black text-red-500 leading-none">01</span>
-            <span class="text-[9px] font-bold text-gray-400 uppercase mt-1">Bekleyen</span>
-          </div>
-          <div class="flex flex-col items-center px-4">
-            <span class="text-[10px] font-black text-emerald-500 leading-none">00</span>
-            <span class="text-[9px] font-bold text-gray-400 uppercase mt-1">Tamamlanan</span>
-          </div>
+    <!-- Status Badge (UX Friendly) -->
+    <div class="ml-auto hidden lg:flex items-center gap-6">
+      <div class="flex gap-4">
+        <div class="flex flex-col items-center px-4 border-r border-gray-100 dark:border-gray-800">
+          <span class="text-[10px] font-black text-red-500 leading-none">01</span>
+          <span class="text-[9px] font-bold text-gray-400 uppercase mt-1">Bekleyen</span>
+        </div>
+        <div class="flex flex-col items-center px-4">
+          <span class="text-[10px] font-black text-emerald-500 leading-none">00</span>
+          <span class="text-[9px] font-bold text-gray-400 uppercase mt-1">Tamamlanan</span>
         </div>
       </div>
     </div>
-  {/if}
+  </div>
 </nav>
 
 <main class="w-full min-h-screen bg-gray-50 dark:bg-[#0c0c0c] transition-all duration-300">
   <!-- Dynamic Spacer for Fixed Header (Golden Ratio Separation) -->
-  <div class="transition-all duration-300 w-full" style="height: {activeTab === 'hasta_kabul' ? '10rem' : '6rem'}"></div>
+  <div class="transition-all duration-300 w-full" style="height: {activeTab === 'hasta_kabul' || (activeTab === 'poliklinik' && activeView === 'examination') ? '10rem' : '6rem'}"></div>
   
   <div class="p-8 lg:p-10">
     {#if activeTab === 'hasta_kabul'}
@@ -256,17 +259,71 @@
     {:else if activeTab === 'poliklinik'}
       {#if activeView === 'examination' && selectedPatient}
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 pb-20 mt-8">
-          <!-- New Exam Form -->
+          <!-- Main Work Area -->
           <div class="lg:col-span-8">
-             <ExaminationForm 
-              patient={selectedPatient} 
-              onSaved={closeExamination} 
-             />
+             
+             <!-- Module Tabs -->
+             <div class="flex gap-4 mb-6">
+                <button 
+                  onclick={() => activeModule = 'muayene'}
+                  class="flex items-center gap-3 px-6 py-4 rounded-xl font-bold transition-all duration-200 border-2
+                  {activeModule === 'muayene' ? 'bg-blue-600 text-white border-blue-600 shadow-lg scale-[1.02]' : 'bg-white text-gray-500 border-transparent hover:bg-gray-100 dark:bg-zinc-900 dark:hover:bg-zinc-800'}"
+                >
+                  <Stethoscope size={20} />
+                  MUAYENE
+                </button>
+                <button 
+                  onclick={() => activeModule = 'asi'}
+                  class="flex items-center gap-3 px-6 py-4 rounded-xl font-bold transition-all duration-200 border-2
+                  {activeModule === 'asi' ? 'bg-emerald-600 text-white border-emerald-600 shadow-lg scale-[1.02]' : 'bg-white text-gray-500 border-transparent hover:bg-gray-100 dark:bg-zinc-900 dark:hover:bg-zinc-800'}"
+                >
+                  <Chemistry size={20} />
+                  AŞI TAKVİMİ
+                </button>
+             </div>
+
+             <div class="animate-in fade-in slide-in-from-bottom-4 duration-300">
+               {#if activeModule === 'muayene'}
+                 <ExaminationForm 
+                  patient={selectedPatient} 
+                  onSaved={closeExamination} 
+                 />
+               {:else if activeModule === 'asi'}
+                 <VaccineSchedule 
+                  patientId={selectedPatient.id!} 
+                  birthDate={selectedPatient.birth_date} 
+                 />
+               {/if}
+             </div>
           </div>
           
-          <!-- History Sidebar -->
+          <!-- Sidebar (History / Info) -->
           <div class="lg:col-span-4 flex flex-col gap-6">
-             <div class="bg-white dark:bg-zinc-900 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden min-h-[400px]">
+             <!-- Patient Card -->
+             <div class="bg-white dark:bg-zinc-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 shadow-sm">
+                <div class="flex items-center gap-4 mb-4">
+                   <div class="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 font-black text-2xl">
+                      {selectedPatient.name[0]}{selectedPatient.surname[0]}
+                   </div>
+                   <div>
+                      <h3 class="font-black text-lg text-gray-800 dark:text-gray-100">{selectedPatient.name} {selectedPatient.surname}</h3>
+                      <p class="text-xs font-mono font-bold text-gray-500">{selectedPatient.tc_no}</p>
+                   </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mt-4">
+                   <div class="bg-gray-50 dark:bg-zinc-950/30 p-3 rounded-lg">
+                      <span class="block text-[9px] font-bold text-gray-400 uppercase">DOĞUM TARİHİ</span>
+                      <span class="block font-bold text-gray-700 dark:text-gray-300 text-sm">{selectedPatient.birth_date}</span>
+                   </div>
+                   <div class="bg-gray-50 dark:bg-zinc-950/30 p-3 rounded-lg">
+                      <span class="block text-[9px] font-bold text-gray-400 uppercase">CİNSİYET</span>
+                      <span class="block font-bold text-gray-700 dark:text-gray-300 text-sm">{selectedPatient.gender}</span>
+                   </div>
+                </div>
+             </div>
+
+             <!-- History Block -->
+             <div class="bg-white dark:bg-zinc-900 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden flex-1 min-h-[400px]">
                <header class="bg-gray-50 dark:bg-zinc-800 px-6 py-5 border-b border-gray-100 dark:border-gray-800">
                   <h3 class="text-[10px] font-black text-gray-500 uppercase tracking-widest flex items-center gap-2">
                     <Time size={16} /> GEÇMİŞ MUAYENELER
