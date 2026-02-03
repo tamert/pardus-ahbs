@@ -4,9 +4,13 @@
     DataTable, 
     Button, 
     Tag,
-    Loading
+    Loading,
+    Modal,
+    TextInput,
+    Select,
+    SelectItem
   } from "carbon-components-svelte";
-  import { Checkmark, Time, Warning } from "carbon-icons-svelte";
+  import { Checkmark, Time, Warning, syringe } from "carbon-icons-svelte";
   import { vaccinationService, type PatientVaccination } from "$lib/services/vaccination";
 
   let { patientId, birthDate } = $props<{ patientId: number, birthDate: string }>();
@@ -14,6 +18,12 @@
   let schedule = $state<PatientVaccination[]>([]);
   let loading = $state(true);
   let processingId = $state<number | null>(null);
+
+  // Modal State
+  let showApplyModal = $state(false);
+  let selectedVaccine = $state<PatientVaccination | null>(null);
+  let formLotNo = $state("");
+  let formInjectionSite = $state("");
 
   async function loadSchedule() {
     loading = true;
@@ -34,23 +44,53 @@
     }
   }
 
-  async function completeVaccine(vaccine: PatientVaccination) {
-    if (!vaccine.id) return;
-    processingId = vaccine.id;
+  function openApplyModal(vaccine: PatientVaccination) {
+    selectedVaccine = vaccine;
+    formLotNo = "";
+    formInjectionSite = "sol_kol"; // Default
+    showApplyModal = true;
+  }
+
+  async function confirmComplete() {
+    if (!selectedVaccine || !selectedVaccine.id) return;
+    
+    // Basic validation
+    if (!formLotNo) {
+        // ideally show inline error, simple alert for now or just proceed if lenient
+        // alert("L lütfen aşı Seri No (Lot) giriniz.");
+        // return;
+    }
+
+    processingId = selectedVaccine.id;
+    showApplyModal = false;
+
     try {
       const today = new Date().toISOString().split('T')[0];
-      await vaccinationService.updateStatus(vaccine.id, 'COMPLETED', today);
+      await vaccinationService.updateStatus(
+          selectedVaccine.id, 
+          'COMPLETED', 
+          today,
+          formLotNo,
+          formInjectionSite
+      );
       
       // Update local state
       schedule = schedule.map(s => 
-        s.id === vaccine.id 
-          ? { ...s, status: 'COMPLETED', administered_date: today } 
+        s.id === selectedVaccine!.id 
+          ? { 
+              ...s, 
+              status: 'COMPLETED', 
+              administered_date: today,
+              lot_no: formLotNo,
+              injection_site: formInjectionSite
+            } 
           : s
       );
     } catch (e) {
       console.error("Aşı durumu güncellenemedi", e);
     } finally {
       processingId = null;
+      selectedVaccine = null;
     }
   }
 
@@ -64,6 +104,7 @@
     { key: "scheduled_date", value: "Planlanan" },
     { key: "vaccine_name", value: "Aşı Adı" },
     { key: "status_display", value: "Durum" },
+    { key: "details", value: "Detay" },
     { key: "actions", value: "İşlem", empty: true },
   ];
 
@@ -74,6 +115,8 @@
     status_display: s.status,
     status: s.status,
     administered_date: s.administered_date,
+    lot_no: s.lot_no,
+    injection_site: s.injection_site,
     _original: s
   })));
 </script>
@@ -118,6 +161,10 @@
                     <span class="font-mono font-bold text-xs">{cell.value}</span>
                 {:else if cell.key === "vaccine_name"}
                     <span class="font-bold text-xs">{cell.value}</span>
+                {:else if cell.key === "details"}
+                     {#if row.lot_no}
+                        <span class="text-[10px] font-mono text-gray-500">LOT: {row.lot_no}</span>
+                     {/if}
                 {:else if cell.key === "actions"}
                     {#if row.status === 'PENDING'}
                         <Button 
@@ -125,7 +172,7 @@
                             size="small" 
                             icon={Checkmark} 
                             disabled={processingId === parseInt(row.id)}
-                            onclick={() => completeVaccine(row._original)}
+                            onclick={() => openApplyModal(row._original)}
                             class="font-bold text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 rounded"
                         >
                             Uygula
@@ -138,4 +185,35 @@
         </DataTable>
     </div>
   {/if}
+
+  <Modal
+    bind:open={showApplyModal}
+    modalHeading="Aşı Uygula"
+    primaryButtonText="Onayla ve Kaydet"
+    secondaryButtonText="İptal"
+    on:click:button--secondary={() => showApplyModal = false}
+    on:submit={confirmComplete}
+  >
+    <div class="space-y-4">
+        <p class="text-sm text-gray-500 mb-4">
+            <strong class="text-gray-900 dark:text-gray-100">{selectedVaccine?.vaccine_name}</strong> aşısı uygulanacak.
+            Lütfen detayları giriniz.
+        </p>
+        
+        <TextInput 
+            labelText="Aşı Seri No (Lot)" 
+            placeholder="Karekod okutun veya manuel girin..." 
+            bind:value={formLotNo}
+            required
+        />
+
+        <Select labelText="Uygulama Bölgesi" bind:selected={formInjectionSite}>
+            <SelectItem value="sol_kol" text="Sol Kol (Deltoid)" />
+            <SelectItem value="sag_kol" text="Sağ Kol (Deltoid)" />
+            <SelectItem value="sol_bacak" text="Sol Bacak (Vastus Lateralis)" />
+            <SelectItem value="sag_bacak" text="Sağ Bacak (Vastus Lateralis)" />
+            <SelectItem value="agiz" text="Oral (Ağızdan)" />
+        </Select>
+    </div>
+  </Modal>
 </div>

@@ -18,6 +18,8 @@ pub struct PatientVaccination {
     pub scheduled_date: String,
     pub administered_date: Option<String>,
     pub status: String, // PENDING, COMPLETED, MISSED
+    pub lot_no: Option<String>,
+    pub injection_site: Option<String>,
     pub notes: Option<String>,
 }
 

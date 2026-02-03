@@ -121,6 +121,8 @@ pub fn run() {
                         scheduled_date TEXT NOT NULL,
                         administered_date TEXT,
                         status TEXT DEFAULT 'PENDING',
+                        lot_no TEXT,
+                        injection_site TEXT,
                         notes TEXT,
                         FOREIGN KEY(patient_id) REFERENCES patients(id)
                     )"

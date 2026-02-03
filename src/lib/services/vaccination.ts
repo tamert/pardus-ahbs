@@ -51,6 +51,8 @@ export interface PatientVaccination {
     scheduled_date: string;
     administered_date?: string | null;
     status: 'PENDING' | 'COMPLETED' | 'MISSED' | 'DELAYED';
+    lot_no?: string | null;
+    injection_site?: string | null;
     notes?: string;
 }
 
@@ -67,7 +69,19 @@ export const vaccinationService = {
         return await invoke("initialize_patient_schedule", { patientId, birthDateStr });
     },
 
-    async updateStatus(id: number, status: string, administeredDate: string | null): Promise<void> {
-        return await invoke("update_vaccination_status", { id, status, administeredDate });
+    async updateStatus(
+        id: number,
+        status: string,
+        administeredDate: string | null,
+        lotNo?: string | null,
+        injectionSite?: string | null
+    ): Promise<void> {
+        return await invoke("update_vaccination_status", {
+            id,
+            status,
+            administeredDate,
+            lotNo,
+            injectionSite
+        });
     }
 };

@@ -8,13 +8,13 @@
 - [ ] Kimlik doğrulama (Doktor girişi)
 
 ## 💉 Aşı İşlemleri Modülü (Wiki Detayları)
-- [ ] **Aşı Takvimi Mantığı**
-    - [ ] Bebek, çocuk ve gebe aşı takvimlerinin yaşa/periyoda göre listelenmesi.
-    - [ ] Doğum tarihine göre otomatik aşı zamanı hesaplama algoritmaları.
+- [x] **Aşı Takvimi Mantığı**
+    - [x] Bebek, çocuk ve gebe aşı takvimlerinin yaşa/periyoda göre listelenmesi.
+    - [x] Doğum tarihine göre otomatik aşı zamanı hesaplama algoritmaları.
 - [ ] **Aşı Kayıt ve Uygulama**
-    - [ ] Aşı kayıt formu (Doz no, uygulama yeri, uygulama şekli vb. alanlar).
-    - [ ] ATS (Aşı Takip Sistemi) entegrasyon simülasyonu (Karekod sorgulama).
-    - [ ] Aşı stok düşüm mantığının kurulması.
+    - [ ] Aşı Uygulama Ekranı (Doz no, uygulama yeri, LOT/Seri No).
+    - [ ] ATS (Aşı Takip Sistemi) entegrasyon simülasyonu (Karekod/Barkod okuma).
+    - [ ] Aşı stok düşüm mantığı.
 - [ ] **Erteleme ve İptal Süreçleri**
     - [ ] Tıbbi nedenlerle veya hasta tercihiyle erteleme kayıtları.
 - [ ] **İstenmeyen Etki (ASİE)**

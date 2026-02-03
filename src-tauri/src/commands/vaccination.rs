@@ -76,13 +76,17 @@ pub async fn update_vaccination_status(
     id: i64,
     status: String,
     administered_date: Option<String>,
+    lot_no: Option<String>,
+    injection_site: Option<String>,
     state: State<'_, DbState>
 ) -> Result<(), String> {
     sqlx::query(
-        "UPDATE patient_vaccinations SET status = ?, administered_date = ? WHERE id = ?"
+        "UPDATE patient_vaccinations SET status = ?, administered_date = ?, lot_no = ?, injection_site = ? WHERE id = ?"
     )
     .bind(status)
     .bind(administered_date)
+    .bind(lot_no)
+    .bind(injection_site)
     .bind(id)
     .execute(&state.pool)
     .await
