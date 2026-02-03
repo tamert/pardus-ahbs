@@ -149,8 +149,8 @@
 </nav>
 
 <main class="w-full min-h-screen bg-gray-50 dark:bg-[#0c0c0c] transition-all duration-300">
-  <!-- Dynamic Spacer for Fixed Header -->
-  <div class="transition-all duration-300 w-full" style="height: {activeTab === 'hasta_kabul' ? '7rem' : '3rem'}"></div>
+  <!-- Dynamic Spacer for Fixed Header (Golden Ratio Separation) -->
+  <div class="transition-all duration-300 w-full" style="height: {activeTab === 'hasta_kabul' ? '10rem' : '6rem'}"></div>
   
   <div class="p-8 lg:p-10">
     {#if activeTab === 'hasta_kabul'}
