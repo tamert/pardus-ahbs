@@ -148,23 +148,23 @@
   {/if}
 </nav>
 
-<Content class="{activeTab === 'hasta_kabul' ? 'pt-[160px]' : 'pt-[96px]'} !p-8 bg-gray-50 dark:bg-[#0c0c0c] transition-all duration-300">
+<Content class="{activeTab === 'hasta_kabul' ? 'pt-[180px]' : 'pt-[100px]'} px-8 pb-12 bg-gray-50 dark:bg-[#0c0c0c] transition-all duration-300 min-h-screen">
   {#if activeTab === 'hasta_kabul'}
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 h-[calc(100vh-210px)]">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 h-[calc(100vh-220px)]">
       
       <!-- Bekleyenler Pane (Key Medical Focus) -->
-      <section class="flex flex-col bg-white dark:bg-zinc-900 border border-gray-200 dark:border-gray-800 rounded-xl shadow-sm overflow-hidden pane-animate transition-all duration-300 hover:shadow-md">
-        <header class="flex items-center justify-between px-5 py-4 bg-white dark:bg-zinc-800/50 border-b border-gray-100 dark:border-gray-800">
-          <div class="flex items-center gap-3">
-            <div class="w-1 h-5 bg-[#0f62fe] rounded-full"></div>
-            <h2 class="text-[11px] font-black text-gray-700 dark:text-gray-200 uppercase tracking-widest">BEKLEYEN HASTA LİSTESİ</h2>
+      <section class="flex flex-col bg-white dark:bg-zinc-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm overflow-hidden pane-animate transition-all duration-300 hover:shadow-md">
+        <header class="flex items-center justify-between px-6 py-5 bg-white dark:bg-zinc-800/50 border-b border-gray-100 dark:border-gray-800">
+          <div class="flex items-center gap-4">
+            <div class="w-1.5 h-6 bg-[#0f62fe] rounded-full"></div>
+            <h2 class="text-xs font-black text-gray-700 dark:text-gray-200 uppercase tracking-widest">BEKLEYEN HASTA LİSTESİ</h2>
           </div>
           <div class="flex items-center gap-2">
-            <span class="flex h-2 w-2 rounded-full bg-blue-500 animate-pulse"></span>
-            <span class="text-[10px] font-bold text-blue-600 bg-blue-50 dark:bg-blue-900/20 px-2 py-0.5 rounded-md">1 HASTA</span>
+            <span class="flex h-2.5 w-2.5 rounded-full bg-blue-500 animate-pulse"></span>
+            <span class="text-[11px] font-bold text-blue-600 bg-blue-50 dark:bg-blue-900/20 px-3 py-1 rounded-lg">1 HASTA</span>
           </div>
         </header>
-        <div class="flex-1 overflow-auto bg-gray-50/30 dark:bg-zinc-950/20">
+        <div class="flex-1 overflow-auto bg-gray-50/30 dark:bg-zinc-950/20 p-2">
           {#if showAddForm}
             <div class="p-8 animate-in fade-in zoom-in duration-300">
               <PatientAdd onAdded={handlePatientAdded} />
@@ -189,64 +189,64 @@
       </section>
 
       <!-- Randevular Pane (Predictive View) -->
-      <section class="flex flex-col bg-white dark:bg-zinc-900 border border-gray-200 dark:border-gray-800 rounded-xl shadow-sm overflow-hidden pane-animate transition-all duration-300 hover:shadow-md" style="animation-delay: 0.1s;">
-        <header class="flex items-center justify-between px-5 py-4 bg-white dark:bg-zinc-800/50 border-b border-gray-100 dark:border-gray-800">
-          <div class="flex items-center gap-3">
-            <div class="w-1 h-5 bg-orange-500 rounded-full"></div>
-            <h2 class="text-[11px] font-black text-gray-700 dark:text-gray-200 uppercase tracking-widest">MHRS RANDEVULARI</h2>
+      <section class="flex flex-col bg-white dark:bg-zinc-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm overflow-hidden pane-animate transition-all duration-300 hover:shadow-md" style="animation-delay: 0.1s;">
+        <header class="flex items-center justify-between px-6 py-5 bg-white dark:bg-zinc-800/50 border-b border-gray-100 dark:border-gray-800">
+          <div class="flex items-center gap-4">
+            <div class="w-1.5 h-6 bg-orange-500 rounded-full"></div>
+            <h2 class="text-xs font-black text-gray-700 dark:text-gray-200 uppercase tracking-widest">MHRS RANDEVULARI</h2>
           </div>
           <Tag type="warm-gray" size="sm" class="font-bold m-0 opacity-60 italic">GÜNCEL</Tag>
         </header>
         <div class="flex-1 flex flex-col items-center justify-center p-12 bg-gray-50/50 dark:bg-zinc-950/40">
-           <div class="w-16 h-16 bg-gray-100 dark:bg-zinc-800/50 rounded-2xl flex items-center justify-center mb-4 border border-gray-200 dark:border-gray-700">
-              <Search size={24} class="text-gray-300" />
+           <div class="w-20 h-20 bg-gray-100 dark:bg-zinc-800/50 rounded-3xl flex items-center justify-center mb-6 border border-gray-200 dark:border-gray-700">
+              <Search size={32} class="text-gray-300" />
            </div>
-           <p class="text-[11px] font-black text-gray-400 uppercase tracking-tight">Bekleyen randevu kaydı yok</p>
-           <p class="text-[10px] text-gray-300 mt-1">Sistem otomatik senkronize ediliyor</p>
+           <p class="text-xs font-black text-gray-400 uppercase tracking-tight">Bekleyen randevu kaydı yok</p>
+           <p class="text-[11px] text-gray-300 mt-2">Sistem otomatik senkronize ediliyor</p>
         </div>
       </section>
 
       <!-- Tamamlananlar Pane (History) -->
-      <section class="flex flex-col bg-white dark:bg-zinc-900 border border-gray-200 dark:border-gray-800 rounded-xl shadow-sm overflow-hidden pane-animate transition-all duration-300 hover:shadow-md" style="animation-delay: 0.2s;">
-        <header class="flex items-center justify-between px-5 py-4 bg-white dark:bg-zinc-800/50 border-b border-gray-100 dark:border-gray-800">
-          <div class="flex items-center gap-3">
-            <div class="w-1 h-5 bg-emerald-500 rounded-full"></div>
-            <h2 class="text-[11px] font-black text-gray-700 dark:text-gray-200 uppercase tracking-widest">TAMAMLANAN MUAYENELER</h2>
+      <section class="flex flex-col bg-white dark:bg-zinc-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm overflow-hidden pane-animate transition-all duration-300 hover:shadow-md" style="animation-delay: 0.2s;">
+        <header class="flex items-center justify-between px-6 py-5 bg-white dark:bg-zinc-800/50 border-b border-gray-100 dark:border-gray-800">
+          <div class="flex items-center gap-4">
+            <div class="w-1.5 h-6 bg-emerald-500 rounded-full"></div>
+            <h2 class="text-xs font-black text-gray-700 dark:text-gray-200 uppercase tracking-widest">TAMAMLANAN MUAYENELER</h2>
           </div>
         </header>
         <div class="flex-1 bg-gray-50/30 dark:bg-zinc-950/20">
            <DataTable size="short" headers={headers} rows={[]} />
-           <div class="p-16 text-center">
-              <Checkmark size={32} class="text-gray-200 mx-auto mb-3" />
-              <p class="text-[11px] font-black text-gray-300 uppercase italic">Henüz tamamlanan işlem yok</p>
+           <div class="p-20 text-center">
+              <Checkmark size={48} class="text-gray-200 mx-auto mb-4" />
+              <p class="text-xs font-black text-gray-300 uppercase italic">Henüz tamamlanan işlem yok</p>
            </div>
         </div>
       </section>
 
       <!-- Insights Pane (Analytics) -->
-      <section class="flex flex-col bg-white dark:bg-zinc-900 border border-gray-200 dark:border-gray-800 rounded-xl shadow-sm overflow-hidden pane-animate transition-all duration-300 hover:shadow-md" style="animation-delay: 0.3s;">
-        <header class="flex items-center justify-between px-5 py-4 bg-white dark:bg-zinc-800/50 border-b border-gray-100 dark:border-gray-800">
-           <div class="flex items-center gap-3">
-             <div class="w-1 h-5 bg-purple-500 rounded-full"></div>
-             <h2 class="text-[11px] font-black text-gray-700 dark:text-gray-200 uppercase tracking-widest">POLİKLİNİK ÖZETİ</h2>
+      <section class="flex flex-col bg-white dark:bg-zinc-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm overflow-hidden pane-animate transition-all duration-300 hover:shadow-md" style="animation-delay: 0.3s;">
+        <header class="flex items-center justify-between px-6 py-5 bg-white dark:bg-zinc-800/50 border-b border-gray-100 dark:border-gray-800">
+           <div class="flex items-center gap-4">
+             <div class="w-1.5 h-6 bg-purple-500 rounded-full"></div>
+             <h2 class="text-xs font-black text-gray-700 dark:text-gray-200 uppercase tracking-widest">POLİKLİNİK ÖZETİ</h2>
            </div>
         </header>
-        <div class="flex-1 p-8 flex flex-col gap-6 bg-gray-50/50 dark:bg-zinc-950/10">
-           <div class="flex justify-between items-center bg-white dark:bg-zinc-800 p-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
-              <span class="text-[10px] font-bold text-gray-500 uppercase">Bugünkü Toplam</span>
-              <span class="text-3xl font-black text-blue-600">1</span>
+        <div class="flex-1 p-10 flex flex-col gap-8 bg-gray-50/50 dark:bg-zinc-950/10">
+           <div class="flex justify-between items-center bg-white dark:bg-zinc-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+              <span class="text-xs font-bold text-gray-500 uppercase">Bugünkü Toplam</span>
+              <span class="text-4xl font-black text-blue-600">1</span>
            </div>
-           <div class="flex justify-between items-center bg-white dark:bg-zinc-800 p-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
-              <span class="text-[10px] font-bold text-gray-500 uppercase">Görüntülü Muayene</span>
-              <span class="text-3xl font-black text-emerald-500">0</span>
-           </div>
-        </div>
+           <div class="flex justify-between items-center bg-white dark:bg-zinc-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+              <span class="text-xs font-bold text-gray-500 uppercase">Görüntülü Muayene</span>
+              <span class="text-4xl font-black text-emerald-500">0</span>
+            </div>
+         </div>
       </section>
 
     </div>
   {:else if activeTab === 'poliklinik'}
     {#if activeView === 'examination' && selectedPatient}
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 pb-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 pb-20">
         <!-- New Exam Form -->
         <div class="lg:col-span-8">
            <ExaminationForm 
@@ -256,14 +256,14 @@
         </div>
         
         <!-- History Sidebar -->
-        <div class="lg:col-span-4 flex flex-col gap-4">
-           <div class="bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden min-h-[400px]">
-             <header class="bg-gray-50 dark:bg-zinc-800 px-4 py-3 border-b border-gray-100 dark:border-gray-800">
+        <div class="lg:col-span-4 flex flex-col gap-6">
+           <div class="bg-white dark:bg-zinc-900 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden min-h-[400px]">
+             <header class="bg-gray-50 dark:bg-zinc-800 px-6 py-4 border-b border-gray-100 dark:border-gray-800">
                 <h3 class="text-[10px] font-black text-gray-500 uppercase tracking-widest flex items-center gap-2">
                   <Time size={16} /> GEÇMİŞ MUAYENELER
                 </h3>
              </header>
-             <div class="p-4">
+             <div class="p-6">
                 <ExaminationList patientId={selectedPatient.id!} />
              </div>
            </div>
@@ -271,23 +271,32 @@
       </div>
     {:else}
       <div class="flex flex-col items-center justify-center h-[50vh] text-gray-400">
-        <Stethoscope size={48} class="mb-4 opacity-50" />
-        <p class="text-lg font-bold">LÜTFEN BİR HASTA SEÇİNİZ</p>
-        <p class="text-sm">Muayene başlatmak için hasta listesinden seçim yapın.</p>
-        <Button kind="ghost" class="mt-4" onclick={() => activeTab = 'kisi_islemleri'}>HASTA LİSTESİNE GİT</Button>
+        <Stethoscope size={64} class="mb-6 opacity-50" />
+        <p class="text-xl font-black tracking-tight">LÜTFEN BİR HASTA SEÇİNİZ</p>
+        <p class="text-sm mt-2 opacity-70">Muayene başlatmak için hasta listesinden seçim yapın.</p>
+        <Button kind="ghost" class="mt-8" onclick={() => activeTab = 'kisi_islemleri'}>HASTA LİSTESİNE GİT</Button>
       </div>
     {/if}
   {:else if activeTab === 'kisi_islemleri'}
-    <div class="p-2 animate-in fade-in duration-300">
-       <div class="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow-md p-4 min-h-[500px]">
+    <div class="animate-in fade-in duration-300">
+       <div class="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-lg p-8 min-h-[600px]">
+          <header class="flex items-center gap-4 mb-8">
+            <div class="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
+               <UserFollow size={24} class="text-blue-600" />
+            </div>
+            <div>
+               <h2 class="text-lg font-black tracking-tight text-gray-800 dark:text-white">HASTA İŞLEMLERİ</h2>
+               <p class="text-xs text-gray-500 font-bold uppercase tracking-wider">Tüm kayıtlı hastaların listesi ve yönetimi</p>
+            </div>
+          </header>
           <PatientList onExaminationRequested={startExamination} />
        </div>
     </div>
   {:else}
     <div class="flex flex-col items-center justify-center h-[50vh] text-gray-400">
-      <Settings size={48} class="mb-4 opacity-50" />
-      <p class="text-lg font-bold">MODÜL HAZIRLIK AŞAMASINDA</p>
-      <p class="text-sm">Geliştirici ekibimiz bu özellik üzerinde çalışıyor.</p>
+      <Settings size={64} class="mb-6 opacity-50" />
+      <p class="text-xl font-black tracking-tight">MODÜL HAZIRLIK AŞAMASINDA</p>
+      <p class="text-sm mt-2 opacity-70">Geliştirici ekibimiz bu özellik üzerinde çalışıyor.</p>
     </div>
   {/if}
 </Content>
