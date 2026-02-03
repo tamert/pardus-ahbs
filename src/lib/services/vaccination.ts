@@ -62,11 +62,11 @@ export const vaccinationService = {
     },
 
     async getPatientSchedule(patientId: number): Promise<PatientVaccination[]> {
-        return await invoke("get_patient_vaccinations", { patientId });
+        return await invoke("get_patient_vaccinations", { patient_id: patientId });
     },
 
     async initializeSchedule(patientId: number, birthDateStr: string): Promise<PatientVaccination[]> {
-        return await invoke("initialize_patient_schedule", { patientId, birthDateStr });
+        return await invoke("initialize_patient_schedule", { patient_id: patientId, birth_date_str: birthDateStr });
     },
 
     async updateStatus(
@@ -79,9 +79,9 @@ export const vaccinationService = {
         return await invoke("update_vaccination_status", {
             id,
             status,
-            administeredDate,
-            lotNo,
-            injectionSite
+            administered_date: administeredDate,
+            lot_no: lotNo,
+            injection_site: injectionSite
         });
     }
 };
