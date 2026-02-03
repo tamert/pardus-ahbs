@@ -1,17 +1,11 @@
+pub mod commands;
+pub mod models;
+
 use sqlx::{sqlite::SqlitePoolOptions, SqlitePool};
-use tauri::{AppHandle, Manager, State};
+use tauri::{Manager, State};
 
-struct DbState {
-    pool: SqlitePool,
-}
-
-// Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-#[tauri::command]
-async fn greet(name: &str, state: State<'_, DbState>) -> Result<String, String> {
-    // Burada basit bir SQL sorgusu yaparak DB'nin çalıştığını test edebiliriz
-    // sqlx::query("SELECT 1").execute(&state.pool).await.map_err(|e| e.to_string())?;
-    
-    Ok(format!("Merhaba, {}! AHBS Veritabanı bağlantısı aktif.", name))
+pub struct DbState {
+    pub pool: SqlitePool,
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -19,11 +13,9 @@ pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
         .setup(|app| {
-            let handle = app.handle().clone();
-            
             // Veritabanını arka planda asenkron olarak başlatıyoruz
             tauri::async_runtime::block_on(async move {
-                let db_url = "sqlite:ahbs.db?mode=rwc"; // App root'ta bir dosya oluşturur
+                let db_url = "sqlite:ahbs.db?mode=rwc"; 
                 
                 let pool = SqlitePoolOptions::new()
                     .max_connections(5)
@@ -36,8 +28,12 @@ pub fn run() {
                     "CREATE TABLE IF NOT EXISTS patients (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                         name TEXT NOT NULL,
-                        tc_no TEXT UNIQUE,
-                        birth_date TEXT
+                        surname TEXT NOT NULL,
+                        tc_no TEXT UNIQUE NOT NULL,
+                        birth_date TEXT NOT NULL,
+                        gender TEXT NOT NULL,
+                        phone TEXT,
+                        address TEXT
                     )"
                 )
                 .execute(&pool)
@@ -49,7 +45,11 @@ pub fn run() {
             
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![greet])
+        .invoke_handler(tauri::generate_handler![
+            commands::patients::create_patient,
+            commands::patients::get_patients,
+            commands::patients::search_patient
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

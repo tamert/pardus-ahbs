@@ -23,7 +23,8 @@
     - [ ] USS/SağlıkNet üzerinden hastanın geçmiş aşılarını çekme (Mock API).
 
 ## 🩺 Muayene ve Hasta Takip
-- [ ] Hasta kayıt modülü için Rust Command ve UI bağlantısı
+- [x] Hasta kayıt modülü için Rust Command ve UI bağlantısı
+- [x] Hasta listeleme ve arama fonksiyonları
 - [ ] Muayene ekranı geliştirmesi (Tanı, Reçete, İşlem)
 - [ ] Reçete sistemi
 
