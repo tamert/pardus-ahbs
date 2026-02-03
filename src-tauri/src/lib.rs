@@ -48,7 +48,8 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             commands::patients::create_patient,
             commands::patients::get_patients,
-            commands::patients::search_patient
+            commands::patients::search_patient,
+            commands::vaccination::calculate_vaccination_schedule
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

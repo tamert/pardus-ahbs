@@ -1,8 +1,9 @@
 <script lang="ts">
   import PatientList from "$lib/components/patients/PatientList.svelte";
   import PatientAdd from "$lib/components/patients/PatientAdd.svelte";
+  import VaccineSchedule from "$lib/components/vaccination/VaccineSchedule.svelte";
 
-  let activeTab = $state("dashboard"); // dashboard, patients, exams, reports
+  let activeTab = $state("dashboard"); // dashboard, patients, vaccines, reports
   let showAddForm = $state(false);
 
   let patientList: { loadPatients: () => void };
@@ -35,6 +36,12 @@
         class="px-6 py-2 rounded-xl text-sm font-bold transition-all {activeTab === 'patients' ? 'bg-primary-50 text-primary-600' : 'text-slate-500 hover:text-slate-700'}"
       >
         Hastalar
+      </button>
+      <button 
+        onclick={() => activeTab = "vaccines"}
+        class="px-6 py-2 rounded-xl text-sm font-bold transition-all {activeTab === 'vaccines' ? 'bg-primary-50 text-primary-600' : 'text-slate-500 hover:text-slate-700'}"
+      >
+        Aşı Takvimi
       </button>
       <button 
         class="px-6 py-2 rounded-xl text-sm font-bold text-slate-300 cursor-not-allowed"
@@ -105,6 +112,10 @@
       {:else}
         <PatientList />
       {/if}
+    </div>
+  {:else if activeTab === "vaccines"}
+    <div class="animate-in fade-in duration-500">
+      <VaccineSchedule />
     </div>
   {/if}
 </div>
