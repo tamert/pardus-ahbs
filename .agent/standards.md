@@ -13,11 +13,13 @@ Pardus AHBS projesinde uygulanacak kod standartları aşağıdadır.
 - Bileşen isimleri `PascalCase` olmalıdır (Örn: `PatientCard.svelte`).
 - Yardımcı fonksiyonlar `utils/` klasöründe, API çağrıları `services/` klasöründe tutulmalıdır.
 
-### 3. Styling & UI (Carbon Design System)
-- Projenin ana tasarım sistemi **Carbon Design System (IBM)**'dir.
-- UI bileşenleri için `carbon-components-svelte` kütüphanesi kullanılmalıdır.
-- **Tema Yönetimi:** Uygulama, sistem temasını (Dark/Light) otomatik olarak takip etmeli ve Carbon'un "white" (light) ve "g100" (dark) temalarını kullanmalıdır.
-- Renkler ve spacing için Carbon token'larına sadık kalınmalı, ad-hoc Tailwind sınıflarından kaçınılmalıdır.
+### 3. Styling & UI (Antigravity Premium Standards)
+- **Tasarım Sistemi:** IBM Carbon Design System temelli "Antigravity Premium" stili uygulanır.
+- **Tipografi:** Ana font **Inter Variable** olmalı, veri yoğunluklu alanlarda **IBM Plex Mono** (Opsiyonel) kullanılmalıdır. Başlıklar net kontrast için genellikle `uppercase` ve `bold` tercih edilmelidir.
+- **Hizalama:** Strict **8px/16px Grid** yapısı korunmalıdır. Componentler arası boşluklar tutarlı olmalıdır.
+- **Görsel Hiyerarşi:** Önemli aksiyonlar (Primary Buttons) ve durum göstergeleri (Status Badges) renk kodlarıyla (Success: Emerald, Warning: Orange, Danger: Red, Info: Blue) ayrıştırılmalıdır.
+- **Modern Dokunuş:** Mikro etkileşimler (hover scale, fade-in transitions) ve yumuşatılmış köşeler (8px radius) standarttır.
+- **Tema:** Dark Mode desteği zorunludur ve tüm custom renkler CSS değişkenleri üzerinden yönetilmelidir.
 
 ## Backend (Rust + Tauri)
 

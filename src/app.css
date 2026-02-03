@@ -1,17 +1,92 @@
 @import "tailwindcss";
 @import "carbon-components-svelte/css/all.css";
 
+/* Antigravity Design System Base */
 :root {
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  /* Typography - Modern & Medical focused */
+  --font-sans: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* Semantic Spacing Tokens */
+  --ahbs-pane-padding: 1.25rem;
+  --ahbs-border-radius: 8px;
+  --ahbs-ribbon-height: 64px;
 }
 
 body {
   font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f4f4f4;
+  color: #161616;
   margin: 0;
   padding: 0;
 }
 
-/* Carbon Design System Overrides for Dark Mode if needed */
-:global(.bx--body) {
-  transition: background-color 0.2s, color 0.2s;
+:global(.dark) body {
+  background-color: #161616;
+  color: #f4f4f4;
+}
+
+/* Carbon Overrides for Premium Feel */
+:global(.bx--content) {
+  transition: padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:global(.bx--data-table) {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+:global(.bx--data-table th) {
+  font-weight: 700 !important;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 0.75rem !important;
+  background-color: var(--cds-layer-01) !important;
+}
+
+:global(.bx--data-table td) {
+  font-size: 0.875rem !important;
+  vertical-align: middle !important;
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccd1d8;
+  border-radius: 10px;
+}
+
+:global(.dark) ::-webkit-scrollbar-thumb {
+  background: #393939;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8adb5;
+}
+
+/* Animations */
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pane-animate {
+  animation: fadeInSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
