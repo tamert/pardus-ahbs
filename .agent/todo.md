@@ -25,9 +25,13 @@
 ## 🩺 Muayene ve Hasta Takip
 - [x] Hasta kayıt modülü için Rust Command ve UI bağlantısı
 - [x] Hasta listeleme ve arama fonksiyonları
-- [ ] Muayene ekranı geliştirmesi (Tanı, Reçete, İşlem)
-- [ ] Reçete sistemi
+- [x] Detaylı Muayene ekranı geliştirmesi (Tanı, Fiziksel Bulgular, ICD-10)
+- [x] Dinamik Reçete sistemi ve geçmiş muayene takibi
+- [ ] Klinik karar destek sistemleri entegrasyonu (İlaç etkileşimi vb.)
 
-## 📊 Raporlama ve Analiz
-- [ ] Günlük/Aylık çalışma raporları
-- [ ] İstatistiksel verilerin görselleştirilmesi
+## 🎨 UI/UX ve Modernizasyon
+- [x] IBM Carbon Design System entegrasyonu
+- [x] Özgür AHBS markalaması ve Antigravity Premium UI standartları
+- [x] Dinamik modül bazlı navigasyon ve ribbon tasarımı
+- [ ] Gelişmiş veri görselleştirme (Dashboard grafikleri)
+- [ ] Mobil uyumluluk ve responsive optimizasyonlar

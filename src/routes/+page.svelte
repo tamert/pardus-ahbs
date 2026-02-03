@@ -97,56 +97,58 @@
     </div>
   </div>
 
-  <!-- Refined Ribbon -->
-  <div class="flex items-center gap-2 px-6 py-2 bg-white dark:bg-zinc-900 border-b border-gray-200 dark:border-gray-800 h-16 shadow-sm">
-    <div class="flex items-center gap-3 pr-6 border-r border-gray-100 dark:border-gray-800">
-      <Button 
-        kind={showAddForm ? "danger--ghost" : "primary"} 
-        size="field" 
-        icon={showAddForm ? Close : Add} 
-        onclick={() => showAddForm = !showAddForm}
-        class="font-extrabold tracking-tight px-6 rounded-lg"
-      >
-        {showAddForm ? 'İPTAL ET' : 'YENİ HASTA KAYDI'}
-      </Button>
-    </div>
+  <!-- Refined Ribbon (Conditional) -->
+  {#if activeTab === 'hasta_kabul'}
+    <div class="flex items-center gap-2 px-6 py-2 bg-white dark:bg-zinc-900 border-b border-gray-200 dark:border-gray-800 h-16 shadow-sm">
+      <div class="flex items-center gap-3 pr-6 border-r border-gray-100 dark:border-gray-800">
+        <Button 
+          kind={showAddForm ? "danger--ghost" : "primary"} 
+          size="field" 
+          icon={showAddForm ? Close : Add} 
+          onclick={() => showAddForm = !showAddForm}
+          class="font-extrabold tracking-tight px-6 rounded-lg"
+        >
+          {showAddForm ? 'İPTAL ET' : 'YENİ HASTA KAYDI'}
+        </Button>
+      </div>
 
-    <div class="flex items-center gap-2 overflow-x-auto no-scrollbar ml-4">
-      <div class="flex flex-col items-center justify-center min-w-[56px] h-11 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all cursor-pointer group active:scale-95">
-        <UserFollow size={18} class="text-blue-600 group-hover:-translate-y-0.5 transition-transform" />
-        <span class="text-[9px] mt-1 font-bold text-gray-500 uppercase">Çağır</span>
-      </div>
-      <div class="flex flex-col items-center justify-center min-w-[56px] h-11 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all cursor-pointer group active:scale-95">
-        <Checkmark size={18} class="text-emerald-600 group-hover:-translate-y-0.5 transition-transform" />
-        <span class="text-[9px] mt-1 font-bold text-gray-500 uppercase">Muayene</span>
-      </div>
-      <div class="flex flex-col items-center justify-center min-w-[56px] h-11 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-all cursor-pointer group active:scale-95">
-        <ArrowRight size={18} class="text-orange-500 group-hover:translate-x-0.5 transition-transform" />
-        <span class="text-[9px] mt-1 font-bold text-gray-500 uppercase">Ertele</span>
-      </div>
-      <div class="flex flex-col items-center justify-center min-w-[56px] h-11 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-all cursor-pointer group active:scale-95">
-        <Close size={18} class="text-red-500 group-hover:scale-110 transition-transform" />
-        <span class="text-[9px] mt-1 font-bold text-gray-500 uppercase">Sil</span>
-      </div>
-    </div>
-
-    <!-- Status Badge (UX Friendly) -->
-    <div class="ml-auto hidden lg:flex items-center gap-6">
-      <div class="flex gap-4">
-        <div class="flex flex-col items-center px-4 border-r border-gray-100 dark:border-gray-800">
-          <span class="text-[10px] font-black text-red-500 leading-none">01</span>
-          <span class="text-[9px] font-bold text-gray-400 uppercase mt-1">Bekleyen</span>
+      <div class="flex items-center gap-2 overflow-x-auto no-scrollbar ml-4">
+        <div class="flex flex-col items-center justify-center min-w-[56px] h-11 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all cursor-pointer group active:scale-95">
+          <UserFollow size={18} class="text-blue-600 group-hover:-translate-y-0.5 transition-transform" />
+          <span class="text-[9px] mt-1 font-bold text-gray-500 uppercase">Çağır</span>
         </div>
-        <div class="flex flex-col items-center px-4">
-          <span class="text-[10px] font-black text-emerald-500 leading-none">00</span>
-          <span class="text-[9px] font-bold text-gray-400 uppercase mt-1">Tamamlanan</span>
+        <div class="flex flex-col items-center justify-center min-w-[56px] h-11 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all cursor-pointer group active:scale-95">
+          <Checkmark size={18} class="text-emerald-600 group-hover:-translate-y-0.5 transition-transform" />
+          <span class="text-[9px] mt-1 font-bold text-gray-500 uppercase">Muayene</span>
+        </div>
+        <div class="flex flex-col items-center justify-center min-w-[56px] h-11 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-all cursor-pointer group active:scale-95">
+          <ArrowRight size={18} class="text-orange-500 group-hover:translate-x-0.5 transition-transform" />
+          <span class="text-[9px] mt-1 font-bold text-gray-500 uppercase">Ertele</span>
+        </div>
+        <div class="flex flex-col items-center justify-center min-w-[56px] h-11 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-all cursor-pointer group active:scale-95">
+          <Close size={18} class="text-red-500 group-hover:scale-110 transition-transform" />
+          <span class="text-[9px] mt-1 font-bold text-gray-500 uppercase">Sil</span>
         </div>
       </div>
+
+      <!-- Status Badge (UX Friendly) -->
+      <div class="ml-auto hidden lg:flex items-center gap-6">
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center px-4 border-r border-gray-100 dark:border-gray-800">
+            <span class="text-[10px] font-black text-red-500 leading-none">01</span>
+            <span class="text-[9px] font-bold text-gray-400 uppercase mt-1">Bekleyen</span>
+          </div>
+          <div class="flex flex-col items-center px-4">
+            <span class="text-[10px] font-black text-emerald-500 leading-none">00</span>
+            <span class="text-[9px] font-bold text-gray-400 uppercase mt-1">Tamamlanan</span>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  {/if}
 </nav>
 
-<Content class="pt-36 !p-6 bg-gray-50 dark:bg-[#0c0c0c]">
+<Content class="{activeTab === 'hasta_kabul' ? 'pt-[128px]' : 'pt-[64px]'} !p-6 bg-gray-50 dark:bg-[#0c0c0c]">
   {#if activeTab === 'hasta_kabul'}
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 h-[calc(100vh-160px)]">
       
