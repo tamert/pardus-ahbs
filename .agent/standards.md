@@ -33,5 +33,11 @@ Pardus AHBS projesinde uygulanacak kod standartları aşağıdadır.
 - Veritabanı işlemleri asenkron (`async`) olarak kurgulanmalıdır.
 
 ## Genel Kurallar
+- **Node Versiyon Yonetimi:** Proje kökündeki `.nvmrc` dosyasına sadık kalınmalı ve `nvm use` komutu kullanılmalıdır.
 - Kod her zaman `Prettier` ve `Clippy` (Rust) kurallarına göre düzenlenmiş olmalıdır.
 - Türkçe değişken ismi kullanılmamalı (dokümantasyon hariç), kod dili İngilizce olmalıdır.
+
+## Çakışma Önleme (Conflict Avoidance)
+- **Modüler Yapı:** Her modül (Hasta, Aşı, Muayene) kendi `services` ve `components` klasörlerine sahip olmalıdır.
+- **State Management:** Svelte 5 toplu `$state` yönetiminde çakışmaları önlemek için her modülün state'i kendi `context` veya `store` dosyasında ayrıştırılmalıdır.
+- **Rust Commands:** Tauri komutları `src-tauri/src/commands` klasörü altında her modül için ayrı dosyalarda tutulmalıdır.
