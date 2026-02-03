@@ -64,10 +64,10 @@
 <!-- Modernized Header & Navigation -->
 <nav class="fixed top-0 left-0 right-0 z-50 bg-[#0f62fe] text-white shadow-md">
   <div class="flex items-center justify-between px-6 h-12">
-    <div class="flex items-center gap-6">
+    <div class="flex items-center gap-6 h-full">
       <div class="flex items-center gap-2">
-        <div class="w-2 h-6 bg-white rounded-full"></div>
-        <h1 class="text-base font-black tracking-tight uppercase">Özgür <span class="font-normal opacity-80">AHBS</span></h1>
+        <div class="w-2 h-5 bg-white rounded-full"></div>
+        <h1 class="text-base font-black tracking-tight uppercase leading-none mt-0.5">Özgür <span class="font-normal opacity-80">AHBS</span></h1>
       </div>
       
       <div class="flex gap-1 ml-4 h-8 bg-black/10 rounded-lg p-0.5">
@@ -148,9 +148,9 @@
   {/if}
 </nav>
 
-<Content class="{activeTab === 'hasta_kabul' ? 'pt-[128px]' : 'pt-[64px]'} !p-6 bg-gray-50 dark:bg-[#0c0c0c]">
+<Content class="{activeTab === 'hasta_kabul' ? 'pt-[160px]' : 'pt-[96px]'} !p-8 bg-gray-50 dark:bg-[#0c0c0c] transition-all duration-300">
   {#if activeTab === 'hasta_kabul'}
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 h-[calc(100vh-160px)]">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 h-[calc(100vh-210px)]">
       
       <!-- Bekleyenler Pane (Key Medical Focus) -->
       <section class="flex flex-col bg-white dark:bg-zinc-900 border border-gray-200 dark:border-gray-800 rounded-xl shadow-sm overflow-hidden pane-animate transition-all duration-300 hover:shadow-md">
@@ -173,10 +173,16 @@
             <DataTable size="short" {headers} rows={bekleyenHastalar} />
           {/if}
         </div>
-        <footer class="px-5 py-2.5 border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-zinc-900 flex justify-between items-center text-[10px] font-bold text-gray-400">
-           <div class="flex gap-4">
-             <span>BUGÜN: 1</span>
-             <span>GECİKEN: 0</span>
+        <footer class="px-6 py-4 border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-zinc-900 flex justify-between items-center text-[10px] font-bold text-gray-400">
+           <div class="flex gap-6">
+             <div class="flex flex-col">
+                <span class="text-[9px] opacity-60 uppercase mb-0.5">BUGÜN</span>
+                <span class="text-blue-600 font-black">01 HASTA</span>
+             </div>
+             <div class="flex flex-col">
+                <span class="text-[9px] opacity-60 uppercase mb-0.5">GECİKEN</span>
+                <span class="text-orange-500 font-black">00 HASTA</span>
+             </div>
            </div>
            <Button kind="ghost" size="small" icon={Settings} hasIconOnly iconDescription="Liste Ayarları" />
         </footer>

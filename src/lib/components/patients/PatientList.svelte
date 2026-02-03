@@ -58,46 +58,74 @@
 </script>
 
 {#if loading}
-  <DataTableSkeleton {headers} rows={5} />
+  <div class="p-4">
+    <DataTableSkeleton {headers} rows={5} />
+  </div>
 {:else}
-  <DataTable
-    title="Hasta İşlemleri"
-    description="Muayene başlatmak için listeden bir hasta seçiniz."
-    {headers}
-    {rows}
-  >
-    <Toolbar>
-      <ToolbarContent>
-        <ToolbarSearch oninput={handleSearch} placeholder="TC No veya İsim ile ara..." />
-      </ToolbarContent>
-    </Toolbar>
-    
-    <svelte:fragment slot="cell" let:row let:cell>
-      {#if cell.key === "actions"}
-        <div class="flex gap-2">
-           <Button 
-            size="small" 
-            kind="ghost" 
-            icon={Stethoscope} 
-            onclick={() => onExaminationRequested?.(row._original)}
-          >
-            Muayene
-          </Button>
-          <Button size="small" kind="ghost" icon={View}>Detay</Button>
-        </div>
-      {:else if cell.key === "gender_label"}
-        <span class="px-2 py-1 rounded text-xs font-bold {row.gender === 'E' ? 'bg-blue-100/50 text-blue-700' : 'bg-pink-100/50 text-pink-700'}">
-          {cell.value}
-        </span>
-      {:else}
-        {cell.value}
-      {/if}
-    </svelte:fragment>
+  <div class="p-2 animate-in fade-in slide-in-from-bottom-2 duration-500">
+    <DataTable
+      title="Hasta İşlemleri"
+      description="Muayene başlatmak için listeden bir hasta seçiniz."
+      {headers}
+      {rows}
+      class="premium-table"
+    >
+      <Toolbar>
+        <ToolbarContent>
+          <ToolbarSearch oninput={handleSearch} placeholder="TC No veya İsim ile ara..." />
+        </ToolbarContent>
+      </Toolbar>
+      
+      <svelte:fragment slot="cell" let:row let:cell>
+        {#if cell.key === "actions"}
+          <div class="flex gap-2">
+             <Button 
+              size="small" 
+              kind="ghost" 
+              icon={Stethoscope} 
+              onclick={() => onExaminationRequested?.(row._original)}
+              class="hover:bg-blue-50 dark:hover:bg-blue-900/20 font-bold"
+            >
+              Muayene
+            </Button>
+            <Button size="small" kind="ghost" icon={View} class="font-bold">Detay</Button>
+          </div>
+        {:else if cell.key === "gender_label"}
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-tight {row.gender === 'E' ? 'bg-blue-100/50 text-blue-700' : 'bg-pink-100/50 text-pink-700'}">
+            {cell.value}
+          </span>
+        {:else if cell.key === "tc_no"}
+          <span class="font-mono text-[11px] font-bold tracking-tighter opacity-70">{cell.value}</span>
+        {:else}
+          <span class="text-xs font-bold text-gray-700 dark:text-gray-300">{cell.value}</span>
+        {/if}
+      </svelte:fragment>
 
-    <svelte:fragment slot="empty">
-      <div class="p-12 text-center text-gray-500 italic font-bold">
-        Hasta kaydı bulunamadı.
-      </div>
-    </svelte:fragment>
-  </DataTable>
+      <svelte:fragment slot="empty">
+        <div class="p-16 text-center border-2 border-dashed border-gray-100 dark:border-gray-800 rounded-lg m-4">
+          <Search size={32} class="mx-auto mb-4 text-gray-200" />
+          <p class="text-sm font-black text-gray-400 uppercase tracking-widest">Kayıtlı hasta bulunamadı</p>
+          <p class="text-xs text-gray-300 mt-2">Lütfen arama kriterlerinizi kontrol edin veya yeni kayıt ekleyin.</p>
+        </div>
+      </svelte:fragment>
+    </DataTable>
+  </div>
 {/if}
+
+<style>
+  :global(.premium-table .bx--data-table-container) {
+    background: transparent !important;
+  }
+  :global(.premium-table .bx--data-table) {
+    background: white !important;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :global(.premium-table .bx--data-table) {
+      background: #18181b !important;
+      border: 1px solid #27272a;
+    }
+  }
+</style>
