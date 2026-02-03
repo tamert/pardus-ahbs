@@ -113,7 +113,7 @@ pub fn run() {
 
                 // Hasta Aşı Takvimi Tablosu
                 sqlx::query(
-                    "CREATE TABLE IF NOT EXISTS patient_vaccinations (
+                    "CREATE TABLE IF NOT EXISTS patient_vaccinations_v2 (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                         patient_id INTEGER NOT NULL,
                         vaccine_code TEXT NOT NULL,

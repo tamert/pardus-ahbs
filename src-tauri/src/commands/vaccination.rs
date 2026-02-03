@@ -19,7 +19,7 @@ pub async fn get_patient_vaccinations(
     state: State<'_, DbState>
 ) -> Result<Vec<PatientVaccination>, String> {
     let vaccinations = sqlx::query_as::<_, PatientVaccination>(
-        "SELECT * FROM patient_vaccinations WHERE patient_id = ? ORDER BY scheduled_date"
+        "SELECT * FROM patient_vaccinations_v2 WHERE patient_id = ? ORDER BY scheduled_date"
     )
     .bind(patient_id)
     .fetch_all(&state.pool)
@@ -56,7 +56,7 @@ pub async fn initialize_patient_schedule(
         let scheduled_date_str = target_date.format("%Y-%m-%d").to_string();
 
         sqlx::query(
-            "INSERT INTO patient_vaccinations (patient_id, vaccine_code, vaccine_name, scheduled_date) VALUES (?, ?, ?, ?)"
+            "INSERT INTO patient_vaccinations_v2 (patient_id, vaccine_code, vaccine_name, scheduled_date) VALUES (?, ?, ?, ?)"
         )
         .bind(patient_id)
         .bind(&def.code)
@@ -81,7 +81,7 @@ pub async fn update_vaccination_status(
     state: State<'_, DbState>
 ) -> Result<(), String> {
     sqlx::query(
-        "UPDATE patient_vaccinations SET status = ?, administered_date = ?, lot_no = ?, injection_site = ? WHERE id = ?"
+        "UPDATE patient_vaccinations_v2 SET status = ?, administered_date = ?, lot_no = ?, injection_site = ? WHERE id = ?"
     )
     .bind(status)
     .bind(administered_date)
