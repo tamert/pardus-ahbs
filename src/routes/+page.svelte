@@ -20,9 +20,14 @@
   import PatientList from "$lib/components/patients/PatientList.svelte";
   import PatientAdd from "$lib/components/patients/PatientAdd.svelte";
   import VaccineSchedule from "$lib/components/vaccination/VaccineSchedule.svelte";
+  import ExaminationForm from "$lib/components/examination/ExaminationForm.svelte";
+  import ExaminationList from "$lib/components/examination/ExaminationList.svelte";
+  import type { Patient } from "$lib/services/patient";
 
   let activeTab = $state("hasta_kabul");
   let showAddForm = $state(false);
+  let selectedPatient = $state<Patient | null>(null);
+  let activeView = $state<"standard" | "examination">("standard");
 
   // MOCK DATA
   const bekleyenHastalar = [
@@ -41,6 +46,18 @@
 
   function handlePatientAdded() {
     showAddForm = false;
+  }
+
+  function startExamination(patient: Patient) {
+    selectedPatient = patient;
+    activeTab = "poliklinik";
+    activeView = "examination";
+  }
+
+  function closeExamination() {
+    activeView = "standard";
+    activeTab = "hasta_kabul";
+    selectedPatient = null;
   }
 </script>
 
@@ -129,7 +146,7 @@
   </div>
 </nav>
 
-<Content class="pt-32 !p-5 bg-gray-50 dark:bg-[#0c0c0c]">
+<Content class="pt-36 !p-6 bg-gray-50 dark:bg-[#0c0c0c]">
   {#if activeTab === 'hasta_kabul'}
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 h-[calc(100vh-160px)]">
       
@@ -219,10 +236,43 @@
       </section>
 
     </div>
+  {:else if activeTab === 'poliklinik'}
+    {#if activeView === 'examination' && selectedPatient}
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 pb-20">
+        <!-- New Exam Form -->
+        <div class="lg:col-span-8">
+           <ExaminationForm 
+            patient={selectedPatient} 
+            onSaved={closeExamination} 
+           />
+        </div>
+        
+        <!-- History Sidebar -->
+        <div class="lg:col-span-4 flex flex-col gap-4">
+           <div class="bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden min-h-[400px]">
+             <header class="bg-gray-50 dark:bg-zinc-800 px-4 py-3 border-b border-gray-100 dark:border-gray-800">
+                <h3 class="text-[10px] font-black text-gray-500 uppercase tracking-widest flex items-center gap-2">
+                  <Time size={16} /> GEÇMİŞ MUAYENELER
+                </h3>
+             </header>
+             <div class="p-4">
+                <ExaminationList patientId={selectedPatient.id!} />
+             </div>
+           </div>
+        </div>
+      </div>
+    {:else}
+      <div class="flex flex-col items-center justify-center h-[50vh] text-gray-400">
+        <Stethoscope size={48} class="mb-4 opacity-50" />
+        <p class="text-lg font-bold">LÜTFEN BİR HASTA SEÇİNİZ</p>
+        <p class="text-sm">Muayene başlatmak için hasta listesinden seçim yapın.</p>
+        <Button kind="ghost" class="mt-4" onclick={() => activeTab = 'kisi_islemleri'}>HASTA LİSTESİNE GİT</Button>
+      </div>
+    {/if}
   {:else if activeTab === 'kisi_islemleri'}
     <div class="p-2 animate-in fade-in duration-300">
        <div class="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow-md p-4 min-h-[500px]">
-          <PatientList />
+          <PatientList onExaminationRequested={startExamination} />
        </div>
     </div>
   {:else}

@@ -1,6 +1,7 @@
-# 🏥 Pardus AHBS (Aile Hekimliği Bilgi Sistemi)
+# 🏥 Özgür AHBS v2
+> **Yerli, Açık Kaynak ve Özgür Aile Hekimliği Bilgi Sistemi**
 
-Pardus AHBS, özellikle milli işletim sistemimiz **Pardus** üzerinde en yüksek performansla çalışacak şekilde tasarlanmış, modern, yerli ve açık kaynaklı bir Aile Hekimliği Bilgi Sistemi'dir.
+Özgür AHBS, özellikle milli işletim sistemimiz **Pardus** üzerinde en yüksek performansla çalışacak şekilde tasarlanmış, modern, yerli ve açık kaynaklı bir Aile Hekimliği Bilgi Sistemi'dir.
 
 ![Tauri](https://img.shields.io/badge/Tauri-2.0-blue?style=for-the-badge&logo=tauri)
 ![Svelte](https://img.shields.io/badge/Svelte-5.0-orange?style=for-the-badge&logo=svelte)
@@ -9,25 +10,26 @@ Pardus AHBS, özellikle milli işletim sistemimiz **Pardus** üzerinde en yükse
 
 ## 🌟 Vizyonumuz
 
-Amacımız, aile hekimlerimizin ve aile sağlığı çalışanlarımızın günlük iş yükünü hafifleten, hızlı, güvenli ve kullanıcı dostu bir yazılım ekosistemi oluşturmaktır. Pardus AHBS, sadece bir yazılım değil, aynı zamanda sağlık teknolojilerinde bağımsızlık ve topluluk odaklı gelişimin bir sembolüdür.
+Amacımız, aile hekimlerimizin ve aile sağlığı çalışanlarımızın günlük iş yükünü hafifleten, hızlı, güvenli ve kullanıcı dostu bir yazılım ekosistemi oluşturmaktır. Özgür AHBS, sadece bir yazılım değil, aynı zamanda sağlık teknolojilerinde bağımsızlık ve topluluk odaklı gelişimin bir sembolüdür.
 
 ## 🚀 Öne Çıkan Özellikler
 
 - **Pardus Uyumluluğu:** Linux tabanlı sistemlerde doğal performans (Tauri sayesinde hafif ve hızlı).
 - **Modern Aşı Modülü:** Bebek, çocuk ve gebe aşı takvimlerinin otomatik yönetimi.
 - **Güvenli Veri:** Tüm veriler yerelde (SQLite) şifrelenmiş ve yüksek performanslı şekilde saklanır.
-- **Kullanıcı Dostu Arayüz:** Svelte 5'in gücüyle akıcı ve karmaşadan uzak bir deneyim.
+- **Kullanıcı Dostu Arayüz:** IBM Carbon Design System ve Svelte 5'in gücüyle akıcı bir deneyim.
 
 ## 🛠️ Teknoloji Stack
 
 - **Frontend:** Svelte 5 (Runes & Snippets)
-- **Styling:** Tailwind CSS
+- **Design System:** IBM Carbon Design System
+- **Styling:** Tailwind CSS (Utility support)
 - **Backend/Core:** Rust (Tauri v2)
-- **Database:** SQLite (sqlx ile yüksek performanslı erişim)
+- **Database:** SQLite (SQLx ile yüksek performanslı erişim)
 
 ## 🤝 Destek ve Katkıda Bulunma
 
-Pardus AHBS, topluluğun gücüyle büyür. Siz de bu milli projeye destek olabilirsiniz:
+Özgür AHBS, topluluğun gücüyle büyür. Siz de bu milli projeye destek olabilirsiniz:
 - 🐛 **Hata Bildirimi:** Karşılaştığınız sorunları "Issues" kısmından bize iletin.
 - 💡 **Özellik Önerisi:** Sisteme eklenmesini istediğiniz özellikleri paylaşın.
 - 💻 **Kod Katkısı:** Pull request (PR) göndererek yazılımın gelişmesine doğrudan katkı sağlayın.

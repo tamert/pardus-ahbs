@@ -1,15 +1,17 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { 
-    DataTable, 
-    Toolbar, 
-    ToolbarContent, 
+  import {
+    DataTable,
+    Toolbar,
+    ToolbarContent,
     ToolbarSearch,
     Button,
     DataTableSkeleton
   } from "carbon-components-svelte";
-  import { View } from "carbon-icons-svelte";
+  import { Stethoscope, View } from "carbon-icons-svelte";
   import { patientService, type Patient } from "$lib/services/patient";
+
+  let { onExaminationRequested } = $props<{ onExaminationRequested?: (p: Patient) => void }>();
 
   let patients = $state<Patient[]>([]);
   let loading = $state(true);
@@ -36,13 +38,12 @@
 
   onMount(loadPatients);
 
-  // Carbon DataTable format
   const headers = [
     { key: "tc_no", value: "TC Kimlik No" },
     { key: "full_name", value: "Ad Soyad" },
     { key: "birth_date", value: "Doğum Tarihi" },
     { key: "gender_label", value: "Cinsiyet" },
-    { key: "overflow", value: "İşlemler", empty: true },
+    { key: "actions", value: "İşlemler" },
   ];
 
   let rows = $derived(patients.map(p => ({
@@ -51,7 +52,8 @@
     full_name: `${p.name} ${p.surname}`,
     birth_date: p.birth_date,
     gender_label: p.gender === 'E' ? 'Erkek' : 'Kadın',
-    gender: p.gender
+    gender: p.gender,
+    _original: p // Keep original object for callbacks
   })));
 </script>
 
@@ -59,22 +61,32 @@
   <DataTableSkeleton {headers} rows={5} />
 {:else}
   <DataTable
-    title="Kayıtlı Hastalar"
-    description="Sistemde kayıtlı olan tüm hastaların ve detaylarının listesi."
+    title="Hasta İşlemleri"
+    description="Muayene başlatmak için listeden bir hasta seçiniz."
     {headers}
     {rows}
   >
     <Toolbar>
       <ToolbarContent>
-        <ToolbarSearch oninput={handleSearch} placeholder="Hasta ara..." />
+        <ToolbarSearch oninput={handleSearch} placeholder="TC No veya İsim ile ara..." />
       </ToolbarContent>
     </Toolbar>
     
     <svelte:fragment slot="cell" let:row let:cell>
-      {#if cell.key === "overflow"}
-        <Button size="small" kind="ghost" icon={View}>Detay</Button>
+      {#if cell.key === "actions"}
+        <div class="flex gap-2">
+           <Button 
+            size="small" 
+            kind="ghost" 
+            icon={Stethoscope} 
+            onclick={() => onExaminationRequested?.(row._original)}
+          >
+            Muayene
+          </Button>
+          <Button size="small" kind="ghost" icon={View}>Detay</Button>
+        </div>
       {:else if cell.key === "gender_label"}
-        <span class="px-2 py-1 rounded text-xs font-bold {row.gender === 'E' ? 'bg-blue-100 text-blue-800' : 'bg-pink-100 text-pink-800'}">
+        <span class="px-2 py-1 rounded text-xs font-bold {row.gender === 'E' ? 'bg-blue-100/50 text-blue-700' : 'bg-pink-100/50 text-pink-700'}">
           {cell.value}
         </span>
       {:else}
@@ -83,8 +95,8 @@
     </svelte:fragment>
 
     <svelte:fragment slot="empty">
-      <div class="p-12 text-center text-gray-500">
-        Henüz hasta kaydı bulunmuyor.
+      <div class="p-12 text-center text-gray-500 italic font-bold">
+        Hasta kaydı bulunamadı.
       </div>
     </svelte:fragment>
   </DataTable>

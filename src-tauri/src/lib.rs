@@ -38,7 +38,37 @@ pub fn run() {
                 )
                 .execute(&pool)
                 .await
-                .expect("Tablo oluşturulamadı");
+                .expect("Patients tablosu oluşturulamadı");
+
+                sqlx::query(
+                    "CREATE TABLE IF NOT EXISTS examinations (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        patient_id INTEGER NOT NULL,
+                        exam_date TEXT NOT NULL,
+                        complaint TEXT,
+                        findings TEXT,
+                        diagnosis TEXT,
+                        treatment TEXT,
+                        FOREIGN KEY(patient_id) REFERENCES patients(id)
+                    )"
+                )
+                .execute(&pool)
+                .await
+                .expect("Examinations tablosu oluşturulamadı");
+
+                sqlx::query(
+                    "CREATE TABLE IF NOT EXISTS prescriptions (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        exam_id INTEGER NOT NULL,
+                        medication_name TEXT NOT NULL,
+                        dosage TEXT,
+                        frequency TEXT,
+                        FOREIGN KEY(exam_id) REFERENCES examinations(id)
+                    )"
+                )
+                .execute(&pool)
+                .await
+                .expect("Prescriptions tablosu oluşturulamadı");
 
                 app.manage(DbState { pool });
             });
@@ -49,7 +79,11 @@ pub fn run() {
             commands::patients::create_patient,
             commands::patients::get_patients,
             commands::patients::search_patient,
-            commands::vaccination::calculate_vaccination_schedule
+            commands::vaccination::calculate_vaccination_schedule,
+            commands::examinations::create_examination,
+            commands::examinations::get_patient_examinations,
+            commands::examinations::create_prescription,
+            commands::examinations::get_examination_prescriptions
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
